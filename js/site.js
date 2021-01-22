@@ -14,6 +14,38 @@ const hardClear = () => {
   calculations.currentTotal = 0;
 }
 
+const calculate = (event) => {
+  if (calculations.lastSymbol === '') {
+    calculations.firstNumber = parseFloat(display.value);
+    display.value = '';
+    display.setAttribute('placeholder', calculations.firstNumber);
+    calculations.lastSymbol = event.target.innerText;
+    console.log('first num', calculations.firstNumber);
+    console.log('symbol', calculations.lastSymbol);
+  } else {
+    console.log('initial total:', calculations.currentTotal);
+    calculations.secondNumber = parseFloat(display.value);
+    switch (calculations.lastSymbol) {
+      case '+':
+        calculations.currentTotal = calculations.firstNumber + calculations.secondNumber;
+        console.log('total add:', calculations.currentTotal);
+        display.value = '';
+        display.setAttribute('placeholder', calculations.currentTotal);
+        calculations.firstNumber = calculations.currentTotal;
+        calculations.lastSymbol = event.target.innerText;
+        break;
+      case '-':
+        calculations.currentTotal = calculations.firstNumber - calculations.secondNumber;
+        console.log('total subtract:', calculations.currentTotal);
+        display.value = '';
+        display.setAttribute('placeholder', calculations.currentTotal);
+        calculations.firstNumber = calculations.currentTotal;
+        calculations.lastSymbol = event.target.innerText;
+        break;
+    }
+  }
+}
+
 clear.addEventListener('click', (event) => {
   hardClear();
 })
@@ -30,9 +62,7 @@ numbersContainer.addEventListener('click', (event) => {
   if (event.target.innerText === '=')
   {
     let number = parseInt(display.value);
-    display.value = '';
-    // display.setAttribute('placeholder', calculations.currentTotal += number);
-    display.value = calculations.currentTotal += number;
+    calculate(event);
   } else {
     display.value += event.target.innerText;
   }
@@ -47,48 +77,5 @@ const symbolsContainer = document.querySelector('#symbols-container');
 symbolsContainer.addEventListener('click', (event) => {
   // Add constants for symbols
 
-  if (calculations.lastSymbol === '') {
-    calculations.firstNumber = parseFloat(display.value);
-    display.value = '';
-    display.setAttribute('placeholder', calculations.firstNumber);
-    calculations.lastSymbol = event.target.innerText;
-    console.log('firstnum', calculations.firstNumber);
-    console.log('symbol', calculations.lastSymbol);
-  } else {
-    console.log('initial total:', calculations.currentTotal);
-    calculations.secondNumber = parseFloat(display.value);
-    switch (calculations.lastSymbol) {
-      case '+':
-        calculations.currentTotal = calculations.firstNumber + calculations.secondNumber;
-        console.log('total after:', calculations.currentTotal);
-        display.value = '';
-        display.setAttribute('placeholder', calculations.currentTotal)
-        break;
-      case '-':
-        console.log(calculations.currentTotal);
-        calculations.currentTotal -= parseFloat(number);
-        break;
-    }
-  }
-
-  // const number = parseFloat(display.value);
-  // if (calculations.currentTotal === 0) {
-  //   calculations.currentTotal = number;
-  // }
-
-
-  // display.value = number;
-
-  // switch (calculations.lastSymbol) {
-  //   case '+':
-  //     calculations.currentTotal += parseFloat(number);
-  //     console.log('total after:', calculations.currentTotal);
-  //     display.value = '';
-  //     display.setAttribute('placeholder', calculations.currentTotal)
-  //     break;
-  //   case '-':
-  //     console.log(calculations.currentTotal);
-  //     calculations.currentTotal -= parseFloat(number);
-  //     break;
-  // }
+  calculate(event);
 })
