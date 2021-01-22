@@ -26,14 +26,22 @@ const calculate = (event) => {
     console.log('initial total:', calculations.currentTotal);
     calculations.secondNumber = parseFloat(display.value);
     switch (calculations.lastSymbol) {
-      case '+':
-        calculations.currentTotal = calculations.firstNumber + calculations.secondNumber;
+      case '/':
+        calculations.currentTotal = calculations.firstNumber / calculations.secondNumber;
         console.log('total add:', calculations.currentTotal);
         display.value = '';
         display.setAttribute('placeholder', calculations.currentTotal);
         calculations.firstNumber = calculations.currentTotal;
         calculations.lastSymbol = event.target.innerText;
         break;
+        case 'X':
+          calculations.currentTotal = calculations.firstNumber * calculations.secondNumber;
+          console.log('total add:', calculations.currentTotal);
+          display.value = '';
+          display.setAttribute('placeholder', calculations.currentTotal);
+          calculations.firstNumber = calculations.currentTotal;
+          calculations.lastSymbol = event.target.innerText;
+          break;
       case '-':
         calculations.currentTotal = calculations.firstNumber - calculations.secondNumber;
         console.log('total subtract:', calculations.currentTotal);
@@ -42,6 +50,14 @@ const calculate = (event) => {
         calculations.firstNumber = calculations.currentTotal;
         calculations.lastSymbol = event.target.innerText;
         break;
+        case '+':
+          calculations.currentTotal = calculations.firstNumber + calculations.secondNumber;
+          console.log('total add:', calculations.currentTotal);
+          display.value = '';
+          display.setAttribute('placeholder', calculations.currentTotal);
+          calculations.firstNumber = calculations.currentTotal;
+          calculations.lastSymbol = event.target.innerText;
+          break;
     }
   }
 }
