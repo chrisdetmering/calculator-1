@@ -12,23 +12,32 @@ const calculations = {
 const hardClear = () => {
   display.value = 0;
   calculations.currentTotal = 0;
+  calculations.lastSymbol = '';
 }
 
 const calculate = (event) => {
-  if (calculations.lastSymbol === '') {
-    calculations.firstNumber = parseFloat(display.value);
-    display.value = '';
-    display.setAttribute('placeholder', calculations.firstNumber);
-    calculations.lastSymbol = event.target.innerText;
-    console.log('first num', calculations.firstNumber);
-    console.log('symbol', calculations.lastSymbol);
+  if (calculations.lastSymbol === '' || calculations.lastSymbol === '=') {
+    if (calculations.lastSymbol === '=') {
+      console.log('hey');
+      calculations.firstNumber = calculations.currentTotal;
+      // display.value = '';
+      // display.setAttribute('placeholder', calculations.firstNumber);
+      calculations.lastSymbol = event.target.innerText;
+    } else {
+      calculations.firstNumber = parseFloat(display.value);
+      display.value = '';
+      display.setAttribute('placeholder', calculations.firstNumber);
+      calculations.lastSymbol = event.target.innerText;
+      console.log('first num', calculations.firstNumber);
+      console.log('symbol', calculations.lastSymbol);
+    }
   } else {
     console.log('initial total:', calculations.currentTotal);
     calculations.secondNumber = parseFloat(display.value);
     switch (calculations.lastSymbol) {
       case '/':
         calculations.currentTotal = calculations.firstNumber / calculations.secondNumber;
-        console.log('total add:', calculations.currentTotal);
+        console.log('total divide:', calculations.currentTotal);
         display.value = '';
         display.setAttribute('placeholder', calculations.currentTotal);
         calculations.firstNumber = calculations.currentTotal;
@@ -36,7 +45,7 @@ const calculate = (event) => {
         break;
         case 'X':
           calculations.currentTotal = calculations.firstNumber * calculations.secondNumber;
-          console.log('total add:', calculations.currentTotal);
+          console.log('total multi:', calculations.currentTotal);
           display.value = '';
           display.setAttribute('placeholder', calculations.currentTotal);
           calculations.firstNumber = calculations.currentTotal;
@@ -63,7 +72,12 @@ const calculate = (event) => {
 }
 
 clear.addEventListener('click', (event) => {
-  hardClear();
+  if (event.target.innerText === 'CE') {
+    hardClear();
+  } else {
+    softClear();
+  }
+  
 })
 
 // numbers, dot, and equals
@@ -77,7 +91,6 @@ numbersContainer.addEventListener('click', (event) => {
 
   if (event.target.innerText === '=')
   {
-    let number = parseInt(display.value);
     calculate(event);
   } else {
     display.value += event.target.innerText;
