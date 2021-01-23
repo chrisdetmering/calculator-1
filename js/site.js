@@ -11,6 +11,7 @@ const calculations = {
 
 const hardClear = () => {
   display.value = 0;
+  display.setAttribute('placeholder', '0');
   calculations.currentTotal = 0;
   calculations.lastSymbol = '';
 }
@@ -30,6 +31,7 @@ const calculate = (event) => {
         display.setAttribute('placeholder', calculations.currentTotal);
         calculations.firstNumber = calculations.currentTotal;
         calculations.lastSymbol = event.target.innerText;
+        calculations.secondNumber = null;
         break;
         case 'X':
           calculations.currentTotal = calculations.firstNumber * calculations.secondNumber;
@@ -37,6 +39,7 @@ const calculate = (event) => {
           display.setAttribute('placeholder', calculations.currentTotal);
           calculations.firstNumber = calculations.currentTotal;
           calculations.lastSymbol = event.target.innerText;
+          calculations.secondNumber = null;
           break;
       case '-':
         calculations.currentTotal = calculations.firstNumber - calculations.secondNumber;
@@ -44,6 +47,7 @@ const calculate = (event) => {
         display.setAttribute('placeholder', calculations.currentTotal);
         calculations.firstNumber = calculations.currentTotal;
         calculations.lastSymbol = event.target.innerText;
+        calculations.secondNumber = null;
         break;
         case '+':
           calculations.currentTotal = calculations.firstNumber + calculations.secondNumber;
