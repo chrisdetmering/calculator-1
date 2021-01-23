@@ -17,27 +17,15 @@ const hardClear = () => {
 
 const calculate = (event) => {
   if (calculations.lastSymbol === '' || calculations.lastSymbol === '=') {
-    if (calculations.lastSymbol === '=') {
-      console.log('hey');
-      calculations.firstNumber = calculations.currentTotal;
-      // display.value = '';
-      // display.setAttribute('placeholder', calculations.firstNumber);
-      calculations.lastSymbol = event.target.innerText;
-    } else {
-      calculations.firstNumber = parseFloat(display.value);
+      calculations.firstNumber = parseFloat(display.value) || parseFloat(display.getAttribute('placeholder'));
       display.value = '';
       display.setAttribute('placeholder', calculations.firstNumber);
       calculations.lastSymbol = event.target.innerText;
-      console.log('first num', calculations.firstNumber);
-      console.log('symbol', calculations.lastSymbol);
-    }
   } else {
-    console.log('initial total:', calculations.currentTotal);
     calculations.secondNumber = parseFloat(display.value);
     switch (calculations.lastSymbol) {
       case '/':
         calculations.currentTotal = calculations.firstNumber / calculations.secondNumber;
-        console.log('total divide:', calculations.currentTotal);
         display.value = '';
         display.setAttribute('placeholder', calculations.currentTotal);
         calculations.firstNumber = calculations.currentTotal;
@@ -45,7 +33,6 @@ const calculate = (event) => {
         break;
         case 'X':
           calculations.currentTotal = calculations.firstNumber * calculations.secondNumber;
-          console.log('total multi:', calculations.currentTotal);
           display.value = '';
           display.setAttribute('placeholder', calculations.currentTotal);
           calculations.firstNumber = calculations.currentTotal;
@@ -53,7 +40,6 @@ const calculate = (event) => {
           break;
       case '-':
         calculations.currentTotal = calculations.firstNumber - calculations.secondNumber;
-        console.log('total subtract:', calculations.currentTotal);
         display.value = '';
         display.setAttribute('placeholder', calculations.currentTotal);
         calculations.firstNumber = calculations.currentTotal;
@@ -61,7 +47,6 @@ const calculate = (event) => {
         break;
         case '+':
           calculations.currentTotal = calculations.firstNumber + calculations.secondNumber;
-          console.log('total add:', calculations.currentTotal);
           display.value = '';
           display.setAttribute('placeholder', calculations.currentTotal);
           calculations.firstNumber = calculations.currentTotal;
@@ -88,7 +73,6 @@ numbersContainer.addEventListener('click', (event) => {
   if (display.value === '0') {
     display.value = '';
   }
-  console.log('Display value:', display.value);
 
   if (event.target.innerText === '=')
   {
@@ -100,7 +84,6 @@ numbersContainer.addEventListener('click', (event) => {
 
     display.value += event.target.innerText;
   }
-  console.log('Display value:', display.value);
 })
 
 // symbols
