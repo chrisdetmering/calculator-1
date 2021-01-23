@@ -3,10 +3,10 @@ const clear = document.querySelector('#clear');
 const display = document.querySelector('#display');
 
 const calculations = {
-  currentTotal: 0,
+  currentTotal: null,
   lastSymbol : '',
-  firstNumber: 0,
-  secondNumber: 0,
+  firstNumber: null,
+  secondNumber: null,
 };
 
 const hardClear = () => {
@@ -66,6 +66,7 @@ const calculate = (event) => {
           display.setAttribute('placeholder', calculations.currentTotal);
           calculations.firstNumber = calculations.currentTotal;
           calculations.lastSymbol = event.target.innerText;
+          calculations.secondNumber = null;
           break;
     }
   }
@@ -92,7 +93,11 @@ numbersContainer.addEventListener('click', (event) => {
   if (event.target.innerText === '=')
   {
     calculate(event);
-  } else {
+    if (calculations.firstNumber != null && calculations.secondNumber === null) {
+      calculations.lastSymbol = '';
+    }
+  }  else {
+
     display.value += event.target.innerText;
   }
   console.log('Display value:', display.value);
