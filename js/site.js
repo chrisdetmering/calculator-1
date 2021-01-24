@@ -19,7 +19,7 @@ const calculations = {
 };
 
 const hardClear = () => {
-  display.value = 0;
+  // display.value = 0;
   display.setAttribute('placeholder', '0');
   calculations.currentTotal = 0;
   calculations.lastSymbol = '';
@@ -33,11 +33,18 @@ const calculate = (event) => {
       calculations.lastSymbol = event.target.innerText;
   } else {
     calculations.secondNumber = parseFloat(display.value);
+    // console.log(parseFloat(display.value));
+    // console.log(!calculations.secondNumber);
+    // calculations.secondNumber = parseFloat(display.value) ? parseFloat(display.value) : calculations.firstNumber;
     // Maybe make this a method
-    if (!calculations.secondNumber) {
-      calculations.lastSymbol = '';
+    if (calculations.secondNumber !== 0 && !calculations.secondNumber) {
+      calculations.lastSymbol = event.target.innerText;
       return;
     }
+    // if (!calculations.secondNumber) {
+    //   calculations.lastSymbol = '';
+    //   return;
+    // }
     switch (calculations.lastSymbol) {
       case division:
         calculations.currentTotal = calculations.firstNumber / calculations.secondNumber;
@@ -90,18 +97,24 @@ const numbersContainer = document.querySelector('#numbers-container');
 numbersContainer.addEventListener('click', (event) => {
   // Only run if a button is clicked
   if (event.target.className === 'number') {
-    if (display.value === '0') {
-      display.value = '';
-    }
+    // if (display.value === '0') {
+    //   display.value = '';
+    // }
   
     if (event.target.innerText === '=')
     {
+      if (calculations.secondNumber === null) {
+        display.value = calculations.firstNumber;
+      }
+
       calculate(event);
+
       if (calculations.firstNumber != null && calculations.secondNumber === null) {
         calculations.lastSymbol = '';
       }
     }  else {
-  
+      console.log(display.value);
+      console.log(parseFloat(display.value));
       display.value += event.target.innerText;
     }
   }
