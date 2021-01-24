@@ -2,6 +2,15 @@
 const clear = document.querySelector('#clear');
 const display = document.querySelector('#display');
 
+// Set math operators
+const division = '/';
+const multiplication = 'X';
+const subtraction = '-';
+const addition = '+';
+
+// Array of math operators
+const mathOperators = [division, multiplication, subtraction, addition];
+
 const calculations = {
   currentTotal: null,
   lastSymbol : '',
@@ -17,15 +26,20 @@ const hardClear = () => {
 }
 
 const calculate = (event) => {
-  if (calculations.lastSymbol === '' || calculations.lastSymbol === '=') {
+  if (calculations.lastSymbol === '' || calculations.lastSymbol === '=') { // maybe remove the ||
       calculations.firstNumber = parseFloat(display.value) || parseFloat(display.getAttribute('placeholder'));
       display.value = '';
       display.setAttribute('placeholder', calculations.firstNumber);
       calculations.lastSymbol = event.target.innerText;
   } else {
     calculations.secondNumber = parseFloat(display.value);
+    // Maybe make this a method
+    if (!calculations.secondNumber) {
+      calculations.lastSymbol = '';
+      return;
+    }
     switch (calculations.lastSymbol) {
-      case '/':
+      case division:
         calculations.currentTotal = calculations.firstNumber / calculations.secondNumber;
         display.value = '';
         display.setAttribute('placeholder', calculations.currentTotal);
@@ -33,7 +47,7 @@ const calculate = (event) => {
         calculations.lastSymbol = event.target.innerText;
         calculations.secondNumber = null;
         break;
-        case 'X':
+        case multiplication:
           calculations.currentTotal = calculations.firstNumber * calculations.secondNumber;
           display.value = '';
           display.setAttribute('placeholder', calculations.currentTotal);
@@ -41,7 +55,7 @@ const calculate = (event) => {
           calculations.lastSymbol = event.target.innerText;
           calculations.secondNumber = null;
           break;
-      case '-':
+      case subtraction:
         calculations.currentTotal = calculations.firstNumber - calculations.secondNumber;
         display.value = '';
         display.setAttribute('placeholder', calculations.currentTotal);
@@ -49,7 +63,7 @@ const calculate = (event) => {
         calculations.lastSymbol = event.target.innerText;
         calculations.secondNumber = null;
         break;
-        case '+':
+        case addition:
           calculations.currentTotal = calculations.firstNumber + calculations.secondNumber;
           display.value = '';
           display.setAttribute('placeholder', calculations.currentTotal);
@@ -74,19 +88,22 @@ clear.addEventListener('click', (event) => {
 const numbersContainer = document.querySelector('#numbers-container');
 
 numbersContainer.addEventListener('click', (event) => {
-  if (display.value === '0') {
-    display.value = '';
-  }
-
-  if (event.target.innerText === '=')
-  {
-    calculate(event);
-    if (calculations.firstNumber != null && calculations.secondNumber === null) {
-      calculations.lastSymbol = '';
+  // Only run if a button is clicked
+  if (event.target.className === 'number') {
+    if (display.value === '0') {
+      display.value = '';
     }
-  }  else {
-
-    display.value += event.target.innerText;
+  
+    if (event.target.innerText === '=')
+    {
+      calculate(event);
+      if (calculations.firstNumber != null && calculations.secondNumber === null) {
+        calculations.lastSymbol = '';
+      }
+    }  else {
+  
+      display.value += event.target.innerText;
+    }
   }
 })
 
@@ -96,7 +113,5 @@ const symbolsContainer = document.querySelector('#symbols-container');
 
 
 symbolsContainer.addEventListener('click', (event) => {
-  // Add constants for symbols
-
   calculate(event);
 })
