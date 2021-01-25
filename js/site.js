@@ -27,14 +27,18 @@ const hardClear = () => {
   calculations.strNumber = '';
 }
 
+const setFirstNumber = () => {
+  // calculations.firstNumber = parseFloat(display.value) || parseFloat(display.getAttribute('placeholder'));
+  calculations.firstNumber = calculations.currentTotal === null ? parseFloat(calculations.strNumber) : calculations.currentTotal;
+  display.value = '';
+  calculations.strNumber = '';
+  display.setAttribute('placeholder', calculations.firstNumber);
+  calculations.lastSymbol = event.target.innerText;
+}
+
 const calculate = (event) => {
   if (calculations.lastSymbol === '' || calculations.lastSymbol === '=') { // maybe remove the ||
-      // calculations.firstNumber = parseFloat(display.value) || parseFloat(display.getAttribute('placeholder'));
-      calculations.firstNumber = calculations.currentTotal === null ? parseFloat(calculations.strNumber) : calculations.currentTotal;
-      display.value = '';
-      calculations.strNumber = '';
-      display.setAttribute('placeholder', calculations.firstNumber);
-      calculations.lastSymbol = event.target.innerText;
+    setFirstNumber();
   } else {
     calculations.secondNumber = parseFloat(calculations.strNumber);
     // console.log(parseFloat(display.value));
