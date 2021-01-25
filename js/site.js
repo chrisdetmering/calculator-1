@@ -111,7 +111,7 @@ numbersContainer.addEventListener('click', (event) => {
   
     if (event.target.innerText === '=')
     {
-      if (calculations.secondNumber === null) {
+      if (calculations.secondNumber === null && calculations.firstNumber) {
         display.value = calculations.firstNumber;
         calculations.strNumber = calculations.firstNumber;
       }
@@ -123,19 +123,19 @@ numbersContainer.addEventListener('click', (event) => {
       }
     }  else {
       
-
-      if (calculations.strNumber === '.') {
-        calculations.strNumber = '0.'
-      }
-      if (calculations.strNumber.includes('.') && event.target.innerText === '.') {
-      
-      } else {
         calculations.strNumber += (calculations.strNumber.includes('.') && event.target.innerText === '.' ) ? '' : event.target.innerText;
+
+        if (calculations.strNumber.length > 1 && calculations.strNumber[0] === '0' && calculations.strNumber[1] !== '.') {
+          calculations.strNumber = calculations.strNumber[1];
+        }
+
+        if (calculations.strNumber === '.') {
+          calculations.strNumber = '0.'
+        }
+
         console.log(calculations.strNumber);
         console.log(parseFloat(calculations.strNumber));
         display.value = calculations.strNumber;
-      }
-
     }
   }
 })
