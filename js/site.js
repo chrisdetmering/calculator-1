@@ -27,9 +27,9 @@ const hardClear = () => {
   calculations.strNumber = '';
 }
 
-const setFirstNumber = () => {
+const setFirstNumber = (event) => {
   // calculations.firstNumber = parseFloat(display.value) || parseFloat(display.getAttribute('placeholder'));
-  calculations.firstNumber = calculations.currentTotal === null ? parseFloat(calculations.strNumber) : calculations.currentTotal;
+  calculations.firstNumber = calculations.currentTotal === null ? parseFloat(calculations.strNumber) || parseFloat(display.getAttribute('placeholder')) : calculations.currentTotal;
   display.value = '';
   calculations.strNumber = '';
   display.setAttribute('placeholder', calculations.firstNumber);
@@ -38,11 +38,10 @@ const setFirstNumber = () => {
 
 const calculate = (event) => {
   if (calculations.lastSymbol === '' || calculations.lastSymbol === '=') { // maybe remove the ||
-    setFirstNumber();
+    setFirstNumber(event);
   } else {
     calculations.secondNumber = parseFloat(calculations.strNumber);
-    // console.log(parseFloat(display.value));
-    // console.log(!calculations.secondNumber);
+
     // calculations.secondNumber = parseFloat(display.value) ? parseFloat(display.value) : calculations.firstNumber;
     // Maybe make this a method
     if (calculations.secondNumber !== 0 && !calculations.secondNumber) {
@@ -60,6 +59,7 @@ const calculate = (event) => {
         calculations.strNumber = '';
         display.setAttribute('placeholder', calculations.currentTotal);
         calculations.firstNumber = calculations.currentTotal;
+        calculations.currentTotal = null;
         calculations.lastSymbol = event.target.innerText;
         calculations.secondNumber = null;
         break;
@@ -69,6 +69,7 @@ const calculate = (event) => {
           calculations.strNumber = '';
           display.setAttribute('placeholder', calculations.currentTotal);
           calculations.firstNumber = calculations.currentTotal;
+          calculations.currentTotal = null;
           calculations.lastSymbol = event.target.innerText;
           calculations.secondNumber = null;
           break;
@@ -78,6 +79,7 @@ const calculate = (event) => {
         calculations.strNumber = '';
         display.setAttribute('placeholder', calculations.currentTotal);
         calculations.firstNumber = calculations.currentTotal;
+        calculations.currentTotal = null;
         calculations.lastSymbol = event.target.innerText;
         calculations.secondNumber = null;
         break;
@@ -87,6 +89,7 @@ const calculate = (event) => {
           calculations.strNumber = '';
           display.setAttribute('placeholder', calculations.currentTotal);
           calculations.firstNumber = calculations.currentTotal;
+          calculations.currentTotal = null;
           calculations.lastSymbol = event.target.innerText;
           calculations.secondNumber = null;
           break;
@@ -115,7 +118,9 @@ numbersContainer.addEventListener('click', (event) => {
   
     if (event.target.innerText === '=')
     {
-      if (calculations.secondNumber === null && calculations.firstNumber) {
+      if (calculations.secondNumber === null && calculations.lastSymbol === '=') {
+        calculations.lastSymbol = '';
+      } else if (calculations.strNumber === '' && calculations.firstNumber ) {
         display.value = calculations.firstNumber;
         calculations.strNumber = calculations.firstNumber;
       }
@@ -124,6 +129,9 @@ numbersContainer.addEventListener('click', (event) => {
 
       if (calculations.firstNumber != null && calculations.secondNumber === null) {
         calculations.lastSymbol = '';
+        // calculations.strNumber = calculations.firstNumber;
+        // calculations.strNumber = calculations.strNumber.toString();
+        // console.log(typeof calculations.strNumber);
       }
     }  else {
       
