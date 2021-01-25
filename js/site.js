@@ -20,10 +20,11 @@ const calculations = {
 };
 
 const hardClear = () => {
-  // display.value = 0;
+  display.value = 0;
   display.setAttribute('placeholder', '0');
-  calculations.currentTotal = 0;
+  calculations.currentTotal = null;
   calculations.lastSymbol = '';
+  calculations.strNumber = '';
 }
 
 const calculate = (event) => {
@@ -112,6 +113,7 @@ numbersContainer.addEventListener('click', (event) => {
     {
       if (calculations.secondNumber === null) {
         display.value = calculations.firstNumber;
+        calculations.strNumber = calculations.firstNumber;
       }
 
       calculate(event);
@@ -120,11 +122,20 @@ numbersContainer.addEventListener('click', (event) => {
         calculations.lastSymbol = '';
       }
     }  else {
-      console.log(display.value);
-      console.log(parseFloat(display.value));
-      calculations.strNumber += event.target.innerText;
-      console.log(calculations.strNumber);
-      display.value = calculations.strNumber;
+      
+
+      if (calculations.strNumber === '.') {
+        calculations.strNumber = '0.'
+      }
+      if (calculations.strNumber.includes('.') && event.target.innerText === '.') {
+      
+      } else {
+        calculations.strNumber += (calculations.strNumber.includes('.') && event.target.innerText === '.' ) ? '' : event.target.innerText;
+        console.log(calculations.strNumber);
+        console.log(parseFloat(calculations.strNumber));
+        display.value = calculations.strNumber;
+      }
+
     }
   }
 })
