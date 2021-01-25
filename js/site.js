@@ -16,6 +16,7 @@ const calculations = {
   lastSymbol : '',
   firstNumber: null,
   secondNumber: null,
+  strNumber: ''
 };
 
 const hardClear = () => {
@@ -27,12 +28,14 @@ const hardClear = () => {
 
 const calculate = (event) => {
   if (calculations.lastSymbol === '' || calculations.lastSymbol === '=') { // maybe remove the ||
-      calculations.firstNumber = parseFloat(display.value) || parseFloat(display.getAttribute('placeholder'));
+      // calculations.firstNumber = parseFloat(display.value) || parseFloat(display.getAttribute('placeholder'));
+      calculations.firstNumber = calculations.currentTotal === null ? parseFloat(calculations.strNumber) : calculations.currentTotal;
       display.value = '';
+      calculations.strNumber = '';
       display.setAttribute('placeholder', calculations.firstNumber);
       calculations.lastSymbol = event.target.innerText;
   } else {
-    calculations.secondNumber = parseFloat(display.value);
+    calculations.secondNumber = parseFloat(calculations.strNumber);
     // console.log(parseFloat(display.value));
     // console.log(!calculations.secondNumber);
     // calculations.secondNumber = parseFloat(display.value) ? parseFloat(display.value) : calculations.firstNumber;
@@ -49,6 +52,7 @@ const calculate = (event) => {
       case division:
         calculations.currentTotal = calculations.firstNumber / calculations.secondNumber;
         display.value = '';
+        calculations.strNumber = '';
         display.setAttribute('placeholder', calculations.currentTotal);
         calculations.firstNumber = calculations.currentTotal;
         calculations.lastSymbol = event.target.innerText;
@@ -57,6 +61,7 @@ const calculate = (event) => {
         case multiplication:
           calculations.currentTotal = calculations.firstNumber * calculations.secondNumber;
           display.value = '';
+          calculations.strNumber = '';
           display.setAttribute('placeholder', calculations.currentTotal);
           calculations.firstNumber = calculations.currentTotal;
           calculations.lastSymbol = event.target.innerText;
@@ -65,6 +70,7 @@ const calculate = (event) => {
       case subtraction:
         calculations.currentTotal = calculations.firstNumber - calculations.secondNumber;
         display.value = '';
+        calculations.strNumber = '';
         display.setAttribute('placeholder', calculations.currentTotal);
         calculations.firstNumber = calculations.currentTotal;
         calculations.lastSymbol = event.target.innerText;
@@ -73,6 +79,7 @@ const calculate = (event) => {
         case addition:
           calculations.currentTotal = calculations.firstNumber + calculations.secondNumber;
           display.value = '';
+          calculations.strNumber = '';
           display.setAttribute('placeholder', calculations.currentTotal);
           calculations.firstNumber = calculations.currentTotal;
           calculations.lastSymbol = event.target.innerText;
@@ -115,7 +122,9 @@ numbersContainer.addEventListener('click', (event) => {
     }  else {
       console.log(display.value);
       console.log(parseFloat(display.value));
-      display.value += event.target.innerText;
+      calculations.strNumber += event.target.innerText;
+      console.log(calculations.strNumber);
+      display.value = calculations.strNumber;
     }
   }
 })
