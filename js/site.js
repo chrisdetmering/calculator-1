@@ -34,13 +34,16 @@ const setFirstNumber = (event) => {
   calculations.lastSymbol = event.target.innerText;
 }
 
+const setSecondNumber = () => calculations.secondNumber = parseFloat(calculations.strNumber);
+
 const calculate = (event) => {
   if (calculations.lastSymbol === '' || calculations.lastSymbol === '=') { // maybe remove the ||
     setFirstNumber(event);
   } else {
-    calculations.secondNumber = parseFloat(calculations.strNumber);
+    setSecondNumber();
+    
 
-    // calculations.secondNumber = parseFloat(display.value) ? parseFloat(display.value) : calculations.firstNumber;
+
     // Maybe make this a method
     if (calculations.secondNumber !== 0 && !calculations.secondNumber) {
       calculations.lastSymbol = event.target.innerText;
