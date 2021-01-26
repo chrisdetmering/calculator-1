@@ -21,18 +21,16 @@ const calculations = {
 
 const hardClear = () => {
   display.value = 0;
-  display.setAttribute('placeholder', '0');
   calculations.currentTotal = null;
   calculations.lastSymbol = '';
   calculations.strNumber = '';
 }
 
 const setFirstNumber = (event) => {
-  // calculations.firstNumber = parseFloat(display.value) || parseFloat(display.getAttribute('placeholder'));
-  calculations.firstNumber = calculations.currentTotal === null ? parseFloat(calculations.strNumber) || parseFloat(display.getAttribute('placeholder')) : calculations.currentTotal;
+  calculations.firstNumber = calculations.currentTotal === null ? parseFloat(calculations.strNumber) || parseFloat(display.value) : calculations.currentTotal;
   display.value = '';
   calculations.strNumber = '';
-  display.setAttribute('placeholder', calculations.firstNumber);
+  display.value = calculations.firstNumber;
   calculations.lastSymbol = event.target.innerText;
 }
 
@@ -57,7 +55,7 @@ const calculate = (event) => {
         calculations.currentTotal = calculations.firstNumber / calculations.secondNumber;
         display.value = '';
         calculations.strNumber = '';
-        display.setAttribute('placeholder', calculations.currentTotal);
+        display.value = calculations.currentTotal;
         calculations.firstNumber = calculations.currentTotal;
         calculations.currentTotal = null;
         calculations.lastSymbol = event.target.innerText;
@@ -67,7 +65,7 @@ const calculate = (event) => {
           calculations.currentTotal = calculations.firstNumber * calculations.secondNumber;
           display.value = '';
           calculations.strNumber = '';
-          display.setAttribute('placeholder', calculations.currentTotal);
+          display.value = calculations.currentTotal;
           calculations.firstNumber = calculations.currentTotal;
           calculations.currentTotal = null;
           calculations.lastSymbol = event.target.innerText;
@@ -77,7 +75,7 @@ const calculate = (event) => {
         calculations.currentTotal = calculations.firstNumber - calculations.secondNumber;
         display.value = '';
         calculations.strNumber = '';
-        display.setAttribute('placeholder', calculations.currentTotal);
+        display.value = calculations.currentTotal;
         calculations.firstNumber = calculations.currentTotal;
         calculations.currentTotal = null;
         calculations.lastSymbol = event.target.innerText;
@@ -87,7 +85,7 @@ const calculate = (event) => {
           calculations.currentTotal = calculations.firstNumber + calculations.secondNumber;
           display.value = '';
           calculations.strNumber = '';
-          display.setAttribute('placeholder', calculations.currentTotal);
+          display.value = calculations.currentTotal;
           calculations.firstNumber = calculations.currentTotal;
           calculations.currentTotal = null;
           calculations.lastSymbol = event.target.innerText;
@@ -112,9 +110,6 @@ const numbersContainer = document.querySelector('#numbers-container');
 numbersContainer.addEventListener('click', (event) => {
   // Only run if a button is clicked
   if (event.target.className === 'number') {
-    // if (display.value === '0') {
-    //   display.value = '';
-    // }
   
     if (event.target.innerText === '=')
     {
@@ -129,9 +124,6 @@ numbersContainer.addEventListener('click', (event) => {
 
       if (calculations.firstNumber != null && calculations.secondNumber === null) {
         calculations.lastSymbol = '';
-        // calculations.strNumber = calculations.firstNumber;
-        // calculations.strNumber = calculations.strNumber.toString();
-        // console.log(typeof calculations.strNumber);
       }
     }  else {
       
@@ -154,8 +146,6 @@ numbersContainer.addEventListener('click', (event) => {
 
 // symbols
 const symbolsContainer = document.querySelector('#symbols-container');
-
-
 
 symbolsContainer.addEventListener('click', (event) => {
   if (event.target.className === 'math-symbol')
