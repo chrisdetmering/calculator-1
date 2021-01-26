@@ -77,10 +77,8 @@ const hardClear = () => {
 }
 
 clear.addEventListener('click', (event) => {
-  if (event.target.innerText === 'CE') {
+  if (event.target.innerText === 'C') {
     hardClear();
-  } else {
-    softClear();
   }
 })
 
