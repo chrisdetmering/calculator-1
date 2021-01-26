@@ -42,17 +42,12 @@ const calculate = (event) => {
   } else {
     setSecondNumber();
     
-
-
     // Maybe make this a method
     if (calculations.secondNumber !== 0 && !calculations.secondNumber) {
       calculations.lastSymbol = event.target.innerText;
       return;
     }
-    // if (!calculations.secondNumber) {
-    //   calculations.lastSymbol = '';
-    //   return;
-    // }
+
     switch (calculations.lastSymbol) {
       case division:
         calculations.currentTotal = calculations.firstNumber / calculations.secondNumber;
