@@ -132,6 +132,7 @@ numbersContainer.addEventListener('click', (event) => {
 const symbolsContainer = document.querySelector('#symbols-container');
 
 symbolsContainer.addEventListener('click', (event) => {
+  // Only run if a button is clicked
   if (event.target.className === 'math-symbol')
   {
     calculate(event);
