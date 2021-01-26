@@ -36,6 +36,16 @@ const setFirstNumber = (event) => {
 
 const setSecondNumber = () => calculations.secondNumber = parseFloat(calculations.strNumber);
 
+const setValues = () => {
+  display.value = '';
+  calculations.strNumber = '';
+  display.value = calculations.currentTotal;
+  calculations.firstNumber = calculations.currentTotal;
+  calculations.currentTotal = null;
+  calculations.lastSymbol = event.target.innerText;
+  calculations.secondNumber = null;
+}
+
 const calculate = (event) => {
   if (calculations.lastSymbol === '' || calculations.lastSymbol === '=') { // maybe remove the ||
     setFirstNumber(event);
@@ -51,43 +61,19 @@ const calculate = (event) => {
     switch (calculations.lastSymbol) {
       case division:
         calculations.currentTotal = calculations.firstNumber / calculations.secondNumber;
-        display.value = '';
-        calculations.strNumber = '';
-        display.value = calculations.currentTotal;
-        calculations.firstNumber = calculations.currentTotal;
-        calculations.currentTotal = null;
-        calculations.lastSymbol = event.target.innerText;
-        calculations.secondNumber = null;
+        setValues();
         break;
         case multiplication:
           calculations.currentTotal = calculations.firstNumber * calculations.secondNumber;
-          display.value = '';
-          calculations.strNumber = '';
-          display.value = calculations.currentTotal;
-          calculations.firstNumber = calculations.currentTotal;
-          calculations.currentTotal = null;
-          calculations.lastSymbol = event.target.innerText;
-          calculations.secondNumber = null;
+          setValues();
           break;
       case subtraction:
         calculations.currentTotal = calculations.firstNumber - calculations.secondNumber;
-        display.value = '';
-        calculations.strNumber = '';
-        display.value = calculations.currentTotal;
-        calculations.firstNumber = calculations.currentTotal;
-        calculations.currentTotal = null;
-        calculations.lastSymbol = event.target.innerText;
-        calculations.secondNumber = null;
+        setValues();
         break;
         case addition:
           calculations.currentTotal = calculations.firstNumber + calculations.secondNumber;
-          display.value = '';
-          calculations.strNumber = '';
-          display.value = calculations.currentTotal;
-          calculations.firstNumber = calculations.currentTotal;
-          calculations.currentTotal = null;
-          calculations.lastSymbol = event.target.innerText;
-          calculations.secondNumber = null;
+          setValues();
           break;
     }
   }
