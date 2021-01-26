@@ -11,7 +11,7 @@ const addition = '+';
 // Array of math operators
 const mathOperators = [division, multiplication, subtraction, addition];
 
-const calculations = {
+const calculatorProps = {
   currentTotal: null,
   lastSymbol : '',
   firstNumber: null,
@@ -21,58 +21,58 @@ const calculations = {
 
 const hardClear = () => {
   display.value = 0;
-  calculations.currentTotal = null;
-  calculations.lastSymbol = '';
-  calculations.strNumber = '';
+  calculatorProps.currentTotal = null;
+  calculatorProps.lastSymbol = '';
+  calculatorProps.strNumber = '';
 }
 
 const setFirstNumber = (event) => {
-  calculations.firstNumber = calculations.currentTotal === null ? parseFloat(calculations.strNumber) || parseFloat(display.value) : calculations.currentTotal;
+  calculatorProps.firstNumber = calculatorProps.currentTotal === null ? parseFloat(calculatorProps.strNumber) || parseFloat(display.value) : calculatorProps.currentTotal;
   display.value = '';
-  calculations.strNumber = '';
-  display.value = calculations.firstNumber;
-  calculations.lastSymbol = event.target.innerText;
+  calculatorProps.strNumber = '';
+  display.value = calculatorProps.firstNumber;
+  calculatorProps.lastSymbol = event.target.innerText;
 }
 
-const setSecondNumber = () => calculations.secondNumber = parseFloat(calculations.strNumber);
+const setSecondNumber = () => calculatorProps.secondNumber = parseFloat(calculatorProps.strNumber);
 
 const setValues = () => {
   display.value = '';
-  calculations.strNumber = '';
-  display.value = calculations.currentTotal;
-  calculations.firstNumber = calculations.currentTotal;
-  calculations.currentTotal = null;
-  calculations.lastSymbol = event.target.innerText;
-  calculations.secondNumber = null;
+  calculatorProps.strNumber = '';
+  display.value = calculatorProps.currentTotal;
+  calculatorProps.firstNumber = calculatorProps.currentTotal;
+  calculatorProps.currentTotal = null;
+  calculatorProps.lastSymbol = event.target.innerText;
+  calculatorProps.secondNumber = null;
 }
 
 const calculate = (event) => {
-  if (calculations.lastSymbol === '' || calculations.lastSymbol === '=') { // maybe remove the ||
+  if (calculatorProps.lastSymbol === '' || calculatorProps.lastSymbol === '=') { // maybe remove the ||
     setFirstNumber(event);
   } else {
     setSecondNumber();
     
     // Maybe make this a method
-    if (calculations.secondNumber !== 0 && !calculations.secondNumber) {
-      calculations.lastSymbol = event.target.innerText;
+    if (calculatorProps.secondNumber !== 0 && !calculatorProps.secondNumber) {
+      calculatorProps.lastSymbol = event.target.innerText;
       return;
     }
 
-    switch (calculations.lastSymbol) {
+    switch (calculatorProps.lastSymbol) {
       case division:
-        calculations.currentTotal = calculations.firstNumber / calculations.secondNumber;
+        calculatorProps.currentTotal = calculatorProps.firstNumber / calculatorProps.secondNumber;
         setValues();
         break;
         case multiplication:
-          calculations.currentTotal = calculations.firstNumber * calculations.secondNumber;
+          calculatorProps.currentTotal = calculatorProps.firstNumber * calculatorProps.secondNumber;
           setValues();
           break;
       case subtraction:
-        calculations.currentTotal = calculations.firstNumber - calculations.secondNumber;
+        calculatorProps.currentTotal = calculatorProps.firstNumber - calculatorProps.secondNumber;
         setValues();
         break;
         case addition:
-          calculations.currentTotal = calculations.firstNumber + calculations.secondNumber;
+          calculatorProps.currentTotal = calculatorProps.firstNumber + calculatorProps.secondNumber;
           setValues();
           break;
     }
@@ -97,33 +97,33 @@ numbersContainer.addEventListener('click', (event) => {
   
     if (event.target.innerText === '=')
     {
-      if (calculations.secondNumber === null && calculations.lastSymbol === '=') {
-        calculations.lastSymbol = '';
-      } else if (calculations.strNumber === '' && calculations.firstNumber ) {
-        display.value = calculations.firstNumber;
-        calculations.strNumber = calculations.firstNumber;
+      if (calculatorProps.secondNumber === null && calculatorProps.lastSymbol === '=') {
+        calculatorProps.lastSymbol = '';
+      } else if (calculatorProps.strNumber === '' && calculatorProps.firstNumber ) {
+        display.value = calculatorProps.firstNumber;
+        calculatorProps.strNumber = calculatorProps.firstNumber;
       }
 
       calculate(event);
 
-      if (calculations.firstNumber != null && calculations.secondNumber === null) {
-        calculations.lastSymbol = '';
+      if (calculatorProps.firstNumber != null && calculatorProps.secondNumber === null) {
+        calculatorProps.lastSymbol = '';
       }
     }  else {
       
-        calculations.strNumber += (calculations.strNumber.includes('.') && event.target.innerText === '.' ) ? '' : event.target.innerText;
+        calculatorProps.strNumber += (calculatorProps.strNumber.includes('.') && event.target.innerText === '.' ) ? '' : event.target.innerText;
 
-        if (calculations.strNumber.length > 1 && calculations.strNumber[0] === '0' && calculations.strNumber[1] !== '.') {
-          calculations.strNumber = calculations.strNumber[1];
+        if (calculatorProps.strNumber.length > 1 && calculatorProps.strNumber[0] === '0' && calculatorProps.strNumber[1] !== '.') {
+          calculatorProps.strNumber = calculatorProps.strNumber[1];
         }
 
-        if (calculations.strNumber === '.') {
-          calculations.strNumber = '0.'
+        if (calculatorProps.strNumber === '.') {
+          calculatorProps.strNumber = '0.'
         }
 
-        console.log(calculations.strNumber);
-        console.log(parseFloat(calculations.strNumber));
-        display.value = calculations.strNumber;
+        console.log(calculatorProps.strNumber);
+        console.log(parseFloat(calculatorProps.strNumber));
+        display.value = calculatorProps.strNumber;
     }
   }
 })
