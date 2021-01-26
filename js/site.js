@@ -16,13 +16,6 @@ const calculatorProps = {
   strNumber: ''
 };
 
-const hardClear = () => {
-  display.value = 0;
-  calculatorProps.currentTotal = null;
-  calculatorProps.lastSymbol = '';
-  calculatorProps.strNumber = '';
-}
-
 const setFirstNumber = (event) => {
   calculatorProps.firstNumber = calculatorProps.currentTotal === null ? parseFloat(calculatorProps.strNumber) || parseFloat(display.value) : calculatorProps.currentTotal;
   display.value = '';
@@ -76,13 +69,19 @@ const calculate = (event) => {
   }
 }
 
+const hardClear = () => {
+  display.value = 0;
+  calculatorProps.currentTotal = null;
+  calculatorProps.lastSymbol = '';
+  calculatorProps.strNumber = '';
+}
+
 clear.addEventListener('click', (event) => {
   if (event.target.innerText === 'CE') {
     hardClear();
   } else {
     softClear();
   }
-  
 })
 
 // numbers, dot, and equals
