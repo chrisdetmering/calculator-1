@@ -92,8 +92,10 @@ numbersContainer.addEventListener('click', (event) => {
   // Only run if a button is clicked
   if (event.target.className === 'number') {
   
+    // Run if the equal symbol has been clicked
     if (event.target.innerText === '=')
     {
+      // 
       if (calculatorProps.secondNumber === null && calculatorProps.lastSymbol === '=') {
         calculatorProps.lastSymbol = '';
       } else if (calculatorProps.strNumber === '' && calculatorProps.firstNumber ) {
@@ -101,25 +103,30 @@ numbersContainer.addEventListener('click', (event) => {
         calculatorProps.strNumber = calculatorProps.firstNumber;
       }
 
+      // Run calculations
       calculate(event);
 
+      // Reset lastSymbol
       if (calculatorProps.firstNumber != null && calculatorProps.secondNumber === null) {
         calculatorProps.lastSymbol = '';
       }
     }  else {
-      
+        // Prevent more than one decimal from being added.
         calculatorProps.strNumber += (calculatorProps.strNumber.includes('.') && event.target.innerText === '.' ) ? '' : event.target.innerText;
 
+        // Prevent more than one zero from being added
+        // and prevent a zero from being added to the begining of
+        // a number unless the zero is followed by a decimal to its right
         if (calculatorProps.strNumber.length > 1 && calculatorProps.strNumber[0] === '0' && calculatorProps.strNumber[1] !== '.') {
           calculatorProps.strNumber = calculatorProps.strNumber[1];
         }
 
+        // Set strNumber to 0. if the decimal button is clicked
         if (calculatorProps.strNumber === '.') {
           calculatorProps.strNumber = '0.'
         }
 
-        console.log(calculatorProps.strNumber);
-        console.log(parseFloat(calculatorProps.strNumber));
+        // set display value
         display.value = calculatorProps.strNumber;
     }
   }
