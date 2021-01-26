@@ -158,5 +158,9 @@ const symbolsContainer = document.querySelector('#symbols-container');
 
 
 symbolsContainer.addEventListener('click', (event) => {
-  calculate(event);
+  if (event.target.className === 'math-symbol')
+  {
+    calculate(event);
+  }
+  
 })
