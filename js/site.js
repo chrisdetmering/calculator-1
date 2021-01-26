@@ -49,7 +49,7 @@ const calculate = (event) => {
   } else {
     setSecondNumber();
     
-    // Maybe make this a method
+    // Update Math Symbol
     if (calculatorProps.secondNumber !== 0 && !calculatorProps.secondNumber) {
       calculatorProps.lastSymbol = event.target.innerText;
       return;
