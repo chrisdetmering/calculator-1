@@ -8,9 +8,6 @@ const multiplication = 'X';
 const subtraction = '-';
 const addition = '+';
 
-// Array of math operators
-const mathOperators = [division, multiplication, subtraction, addition];
-
 const calculatorProps = {
   currentTotal: null,
   lastSymbol : '',
