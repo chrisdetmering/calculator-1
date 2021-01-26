@@ -44,7 +44,7 @@ const setValues = () => {
 }
 
 const calculate = (event) => {
-  if (calculatorProps.lastSymbol === '' || calculatorProps.lastSymbol === '=') { // maybe remove the ||
+  if (calculatorProps.lastSymbol === '') {
     setFirstNumber(event);
   } else {
     setSecondNumber();
