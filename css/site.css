@@ -26,6 +26,7 @@ main {
 
 #clear {
   background-color: #912013;
+  display: inline-block;
   font-size: 1.75rem;
   text-align: center;
   width: 10%;
