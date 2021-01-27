@@ -20,6 +20,7 @@ main {
 #display-container {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 5px;
   width: 100%;
 }
 
@@ -29,7 +30,11 @@ main {
 }
 
 #display {
+  background-color: #fff;
+  border: 1px solid #000;
+  color: #000;
   font-size: 1.75rem;
+  padding-right: 5px;
   text-align: right;
   width: 90%;
 }
