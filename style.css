@@ -84,6 +84,21 @@ main {
   width: 33.3333%;
 }
 
+
+.equals {
+  font-size: 2rem;
+  margin: 2px 2px 2px 0px;
+  padding: 15px;
+  width: 33.3333%;
+}
+
+.decimal {
+  font-size: 2rem;
+  margin: 2px 2px 2px 0px;
+  padding: 15px;
+  width: 33.3333%;
+}
+
 button {
   background-color: #717788;
   border: 1px solid #000;
