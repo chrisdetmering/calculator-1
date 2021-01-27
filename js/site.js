@@ -26,7 +26,7 @@ const setFirstNumber = (event) => {
 
 const setSecondNumber = () => calculatorProps.secondNumber = parseFloat(calculatorProps.strNumber);
 
-const setValues = () => {
+const setValues = (event) => {
   display.value = '';
   calculatorProps.strNumber = '';
   display.value = calculatorProps.currentTotal;
