@@ -3,10 +3,10 @@ const clear = document.querySelector('#clear');
 const display = document.querySelector('#display');
 
 // Set math operators
-const division = '/';
-const multiplication = 'X';
-const subtraction = '-';
-const addition = '+';
+const division = document.querySelector('#division').id;
+const multiplication = document.querySelector('#multiplication').id;
+const subtraction = document.querySelector('#subtraction').id;
+const addition = document.querySelector('#addition').id;
 
 const calculatorProps = {
   currentTotal: null,
@@ -21,7 +21,7 @@ const setFirstNumber = (event) => {
   display.value = '';
   calculatorProps.strNumber = '';
   display.value = calculatorProps.firstNumber;
-  calculatorProps.lastSymbol = event.target.innerText;
+  calculatorProps.lastSymbol = event.target.id;
 }
 
 const setSecondNumber = () => calculatorProps.secondNumber = parseFloat(calculatorProps.strNumber);
@@ -32,7 +32,7 @@ const setValues = (event) => {
   display.value = calculatorProps.currentTotal;
   calculatorProps.firstNumber = calculatorProps.currentTotal;
   calculatorProps.currentTotal = null;
-  calculatorProps.lastSymbol = event.target.innerText;
+  calculatorProps.lastSymbol = event.target.id;
   calculatorProps.secondNumber = null;
 }
 
@@ -44,26 +44,26 @@ const calculate = (event) => {
     
     // Update Math Symbol
     if (calculatorProps.secondNumber !== 0 && !calculatorProps.secondNumber) {
-      calculatorProps.lastSymbol = event.target.innerText;
+      calculatorProps.lastSymbol = event.target.id;
       return;
     }
 
     switch (calculatorProps.lastSymbol) {
       case division:
         calculatorProps.currentTotal = calculatorProps.firstNumber / calculatorProps.secondNumber;
-        setValues();
+        setValues(event);
         break;
         case multiplication:
           calculatorProps.currentTotal = calculatorProps.firstNumber * calculatorProps.secondNumber;
-          setValues();
+          setValues(event);
           break;
       case subtraction:
         calculatorProps.currentTotal = calculatorProps.firstNumber - calculatorProps.secondNumber;
-        setValues();
+        setValues(event);
         break;
         case addition:
           calculatorProps.currentTotal = calculatorProps.firstNumber + calculatorProps.secondNumber;
-          setValues();
+          setValues(event);
           break;
     }
   }
