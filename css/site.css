@@ -61,6 +61,7 @@ main {
 }
 
 .math-symbol {
+  background-color: #034c8c;
   font-size: 2rem;
   margin: 2px 0px 2px 0px;
   padding: 15px;
@@ -84,4 +85,8 @@ button {
   border: 1px solid #000;
   border-radius: 4px;
   color: #f1f1e6;
+}
+
+#equal {
+  background-color: #008a61;
 }
