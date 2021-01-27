@@ -24,18 +24,21 @@ main {
 }
 
 #clear {
+  font-size: 1.75rem;
   width: 10%;
 }
 
 #display {
-  width: 85%;
+  font-size: 1.75rem;
+  text-align: right;
+  width: 90%;
 }
 
 #numbers-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 66.6666%;
+  width: 75%;
 }
 
 .center {
@@ -47,14 +50,14 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 33.3333%;
+  width: 25%;
 }
 
 .math-symbol {
   padding: 15px;
   font-size: 2rem;
-  margin: 2px;
-  width: 33.3333%;
+  margin: 2px 0px 2px 0px;
+  width: 100%;
 }
 
 .number-row {
@@ -65,6 +68,6 @@ main {
 .number {
   padding: 15px;
   font-size: 2rem;
-  margin: 2px;
+  margin: 2px 2px 2px 0px;
   width: 33.3333%;
 }
