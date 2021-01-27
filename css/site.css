@@ -29,6 +29,7 @@ main {
   display: inline-block;
   font-size: 1.75rem;
   text-align: center;
+  -webkit-appearance: none;
   width: 10%;
 }
 
